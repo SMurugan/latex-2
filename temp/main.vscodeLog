@@ -1,0 +1,18 @@
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--77
+
+
+Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
+d on input line 78.
+
+
+! LaTeX Error: \mathbf allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.78     임�
+             ��의 $y_n \ (n > 1)$ 에 대해서 다음과 같은 식을 생...
+
+? 

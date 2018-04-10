@@ -1,0 +1,136 @@
+    \documentclass[a4paper,10pt]{article}
+    \usepackage[scale=0.8,twoside,bindingoffset=5mm]{geometry}
+    \usepackage[doublespacing]{setspace}
+    \usepackage{mathtools}
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{amsthm}
+    \usepackage{graphicx,url}
+    \usepackage{kotex}
+    \usepackage[utf8]{inputenc}
+    \usepackage[english]{babel}
+    
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem*{remark}{Remark}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    
+\begin{document}
+    \begin{theorem}
+        Function $F_1: (t, x, y, z) \mapsto F_1(t, x, y,z), F_2$ and $F_3$ and its any partial derivative is continuous in some rectangle area $\mathbb{R}: (t, x, y, z) \in \left[ t_1, t_2 \right] \times \left[ x_1, x_2 \right] \times \left[ y_1, y_2 \right] \times \left[ z_1, z_2 \right]$, containing $(t_0, x_0, y_0, z_0)$. Then the initial value problem
+        \begin{gather*}
+            x^{\prime} = F_1(t, x, y, z) \\    
+            y^{\prime} = F_2(t, x, y, z) \\ 
+            z^{\prime} = F_3(t, x, y, z) \\ 
+            x(t_0) = x_0, y(t_0) = y_0, z(t_0) = z_0
+        \end{gather*}
+    \end{theorem}
+        
+    \begin{proof}
+        Let's make a new sequence $\{ x_n\}, \{ y_n\}, \{ z_n\}$ by following iteration.
+        \begin{eqnarray*}
+            x_0 = x_0, \quad x_{n+1} = x_0 + \int_{t_0}^{t} F_1(s, x_n(s), y_n(s), z_n(s)) ds \\
+            y_0 = y_0, \quad y_{n+1} = y_0 + \int_{t_0}^{t} F_2(s, x_n(s), y_n(s), z_n(s)) ds \\
+            z_0 = z_0, \quad z_{n+1} = z_0 + \int_{t_0}^{t} F_3(s, x_n(s), y_n(s), z_n(s)) ds
+        \end{eqnarray*}
+        By the continuity assumption, we can apply extreme value theorem and set $|F_1| \leq M, |F_2| \leq N,$ and $|F_3| \leq P$. W.L.O.G, we will only show this theorem with respect to x.
+
+        \begin{displaymath}
+            |x_n - x_0| = \int_{t_0}^{t} F_1(s, x_n, y_n, z_n) ds \leq M \cdot |t - t_0|
+        \end{displaymath}
+        Thus, choosing $|t - t_0| \leq$ min$(a, \frac{b}{M})$ guarantees the existence of the sequence inside the rectangle region, where $a$ and $b$ each represents min\{$t_0 - t_1, t_2 - t_0$\} and min\{$x_0 - x_1, x_2 - x_0$\}.
+
+        Next we will show the convergence of this sequnce by using
+        \begin{displaymath}
+            x_n = x_0 + \sum_{1}^{n} (x_i - i_{i-1})
+        \end{displaymath}
+        The difference between to adjacent terms $|x_{n+1} - x_{n}|$ is 
+        \begin{displaymath}
+            |x_{n+1} - x_{n}| = \left| \int_{t_0}^t F_1(s, x_{n}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_{n-1}) ds \right|
+        \end{displaymath}
+        By the extreme value theorem, we can get some maximum values of following derivates.
+
+        \begin{displaymath}
+            A = \text{max}
+            \begin{bmatrix}
+                \frac{\partial F_1}{\partial x} & \frac{\partial F_1}{\partial y} & \frac{\partial F_1}{\partial z} \\
+                \frac{\partial F_2}{\partial x} & \frac{\partial F_2}{\partial y} & \frac{\partial F_2}{\partial z} \\
+                \frac{\partial F_3}{\partial x} & \frac{\partial F_3}{\partial y} & \frac{\partial F_3}{\partial z}
+            \end{bmatrix}
+        \end{displaymath}
+        \begin{align*}
+            F_1(s, x_{n}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_{n-1}) &= F_1(s, x_{n}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_n, z_n) \\
+                                                                         &+ F_1(s, x_{n-1}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_n) \\
+                                                                         &+ F_1(s, x_{n-1}, y_{n-1}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_{n-1})
+        \end{align*}
+        \begin{displaymath}
+            \frac{\partial F_1^{*}}{\partial x} |x_{n} - x_{n-1}| + \frac{\partial F_1^{*}}{\partial y} |y_{n} - y_{n-1}| + \frac{\partial F_1^{*}}{\partial z} |z_{n} - z_{n-1}| \leq A_{11} |x_{n} - x_{n-1}| + A_{12} |y_{n} - y_{n-1}|+ A_{13} |z_{n} - z_{n-1}|
+        \end{displaymath}
+        We use these symbols from now on.
+        \begin{displaymath}
+            A_i \coloneqq \text{max}(A_{i1}, A_{i2}, A_{i3}) \ \text{for} \ i = 1, 2, 3, \quad \ \ p_n \coloneqq |x_{n} - x_{n-1}| + |y_{n} - y_{n-1}|+ |z_{n} - z_{n-1}| \ \text{for} \ n \geq 1
+        \end{displaymath}
+        By the process above,
+        \begin{align*}
+            |x_{n+1} - x_n| &= \left| \int_{t_0}^t F_1(s, x_{n}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_{n-1}) ds \right| \\
+            &= |t - t_0| \cdot (F_1(s, x_{n}, y_{n}, z_{n}) - F_1(s, x_{n-1}, y_{n-1}, z_{n-1}))^{*} \\
+            &\leq |t - t_0| \cdot A_{11} |x_{n} - x_{n-1}| + A_{12} |y_{n} - y_{n-1}|+ A_{13} |z_{n} - z_{n-1}| \\
+            &\leq |t - t_0| \cdot A_1 \cdot p_{n}
+        \end{align*}
+        Using the same method and summing the left handed side, we can get
+        \begin{displaymath}
+            |x_{n+1} - x_n| + |y_{n+1} -y_n| + |z_{n+1} - z_n| = p_{n+1} \leq |t- t_0| \cdot p_n \cdot (A_1 + A_2 + A_3)
+        \end{displaymath}
+        Hence, choosing choosing $|t - t_0| \leq$ min$(a, \frac{b}{M}, \frac{r}{A_1 + A_2 + A_3})$ for $0 < r < 1$ will prove that $p_{n+1} \leq r \cdot p_n$, making the new sequence $\{ p_n \}$ contracting. \\
+        The next procedure is to evaluate the convergence of the sequence defined by following series
+        \begin{displaymath}
+            x_n = x_0 + \sum_{1}^{n} (x_i - x_{i-1})
+        \end{displaymath}
+        by showing the absolute value of this series converges, and using the absolute convergence theorem guarantees the convergence of the original series.
+        \begin{displaymath}
+            x_n = x_0 + \sum_{1}^{n} (x_i - x_{i-1}) \leq x_0 + \sum_{1}^{n} |x_i - x_{i-1}| \leq x_0 + \sum_{1}^{n} p_i \leq x_0 + \sum_{1}^{n} r^i \cdot p_0
+        \end{displaymath}
+        By applying both comparison test and absolute convergence theorem, the sequence $\{ x_n \}$ converges into function $\xi(t)$. We can apply the same process to $\{ y_n \}$ and $\{ z_n \}$ to show they also converges into $\phi(t)$ and $\psi(t)$.\\ \newline
+        To apply fundamental theorem of calculus to the equation
+        \begin{displaymath}
+            x_0 = x_0, \quad x_{n+1} = x_0 + \int_{t_0}^{t} F_1(s, x_n(s), y_n(s), z_n(s)) ds
+        \end{displaymath}
+        we should show the continuity of the function near $t_0$ derived from the series above:
+        \begin{displaymath}
+            \xi(t) = x_0 + \sum_{1}^{\infty} (x_i - x_{i-1})
+        \end{displaymath}
+        We should be able to find appropriate $\delta(\epsilon)$ to make this statement true: $\forall t \in (t_0 - \delta, t_0 + \delta)$, $|\xi(t) - \xi(t_0)| < \epsilon$ for any positive $\epsilon$. 
+        \begin{displaymath}
+            |\xi(t) - \xi(t_0)| \leq |\xi(t) - x_n(t)| + |x_n(t) - x_n(t_0)| + |x_n(t_0) - \xi(t_0)| \qquad \text{by triangle inequality} 
+        \end{displaymath}
+        The first and third term could be evaluated by the following manipulation.
+        \begin{displaymath}
+            |\xi(t) - x_n(t)| = \sum_{n+1}^{\infty} (x_i - x_{i-1}) \leq \sum_{n+1}^{\infty} |x_i - x_{i-1}| \leq \sum_{n+1}^{\infty} p_i \leq \sum_{n+1}^{\infty} p_0 \cdot r^{i} = p_0 \cdot \frac{r^{n+1}}{1-r}
+        \end{displaymath}
+        \begin{displaymath}
+            \exists N \in \mathbb{N} \ \text{s.t.} \ \forall n > N, |\xi - x_n| < \epsilon \ \text{for any given} \ \epsilon > 0
+        \end{displaymath}
+        In addition, the assumption that $\{ x_n\}$ is continuous at $t_0$ makes the following statement true.
+        \begin{displaymath}
+            \forall \epsilon > 0, \exists \delta > 0 \ \text{s.t.} \ 0 < |t - t_0| < \delta \longrightarrow |x_{n}(t) - x_{n}(t_0)| < \epsilon
+        \end{displaymath}
+        Therefore, for any given $\epsilon_0 > 0$,
+        \begin{displaymath}
+            |\xi(t) - \xi(t_0)| \leq |\xi(t) - x_n(t)| + |x_n(t) - x_n(t_0)| + |x_n(t_0) - \xi(t_0)| < (\epsilon_0 / 3) \cdot 3 < \epsilon_0
+        \end{displaymath}
+        making function $\xi(t)$ continuous near $t_0$. Applying fundamental theorem of calculus makes the following iteration reasonable after making the function $\phi(t), \psi(t)$.
+        \begin{displaymath}
+            \xi(t) = x_0 + \int_{t_0}^{t} F_1(s, \xi(s), \phi(s), \psi(s)) ds
+        \end{displaymath}
+        Now lets show the uniqueness of the set of function, $\{ \xi(t), \phi(t), \psi(t) \}$. If we assume there are two different $\xi(t)$ and $\chi(t)$ for $x_n$. Then
+        \begin{align*}
+            |\xi(t) - \chi(t)| &= \left| \int_{t_0}^{t} F_1(s, \xi(s), \phi(s), \psi(s) - F_1(s, \chi(s), \phi(s), \psi(s)) ds \right| \\ 
+            &= |t-t_0| \cdot \frac{\partial F_1}{\partial x}(s^{*})|\xi(s) - \chi(s)| \\ 
+            &\leq |t-t_0| \cdot A_{11} \cdot \ \text{max} |\xi(s) - \chi(s)| \\
+            &\leq r \cdot \ \text{max} |\xi(s) - \chi(s)|
+        \end{align*}
+        which is contradictory since $0<r<1$, and the equation states $|\xi(t) - \chi(t)| <$ max$|\xi(t) - \chi(t)| \leq r \cdot \ \text{max} |\xi(s) - \chi(s)|$. In the same way, we can prove that there is unique set of $\{ \xi(t), \phi(t), \psi(t) \}$ satisfying the differential equation and initial value condition.
+
+    \end{proof} 
+    
+
+\end{document}

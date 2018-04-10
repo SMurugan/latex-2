@@ -1,0 +1,204 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage[scale=0.75,twoside,bindingoffset=5mm]{geometry}
+    \usepackage[doublespacing]{setspace}
+    
+    \usepackage{amsmath}
+    \usepackage{amssymb}
+    \usepackage{amsthm}
+    \usepackage{graphicx,url}
+    \usepackage{kotex}
+    \usepackage[utf8]{inputenc}
+    \usepackage[english]{babel}
+    \date{2018년 4월}
+    \title{Linear Differential Equation}
+    
+    \newtheorem{theorem}{Theorem}[section]
+    \newtheorem*{remark}{Remark}
+    \renewcommand\qedsymbol{$\blacksquare$}
+    
+    \begin{document}
+    \maketitle
+    \section{Introduction}
+    Linear system of differential equation의 해의 존재성과 유일성을 보이고자 한다. 다음과 같은 Linear system of differential equation을 생각할 수 있다.
+    
+    \begin{equation}
+        \begin{cases}
+        x_1^{\prime} = f_1(t, x_1, x_2, \cdots, x_n) \\
+        x_2^{\prime} = f_2(t, x_1, x_2, \cdots, x_n) \\
+        \,\, \vdots \qquad\qquad\quad\, \, \, \vdots \\
+        x_n^{\prime} = f_n(t, x_1, x_2, \cdots, x_n) \\
+        \end{cases}
+    \end{equation}
+    이 system과 IVP $x_1(t_0) = x_1^0, \, x_2(t_0) = x_2^0, \, \cdots \, x_n(t_0) = x_n^0,\, t_0 \in I: t \in (a, b)$가 주어졌다고 하자. 이때 적당한 조건이 주어지면 다음과 같은 Theorem을 만족한다.\newline
+    \begin{theorem}[Existence and Uniqueness Theorem of the solution of a linear system of ODE]
+    \label{ode}
+    $f_1, f_2, \cdots f_n$과 $\partial f_i/\partial x_j, /, (i,j) \in \{(x,y) | x = 1, 2, \cdots n \ \text{and} \ y = 1, 2, \cdots n\}$이 어떤 $tx_1x_2\cdots x_n$ space 상의 rectangle $\mathbb{R}: [ \alpha, \beta ] \times [ \alpha_1, \beta_1 ] \times \cdots [ \alpha_n, \beta_n ]$에서 연속이고 IVP에 해당하는 $(t_0, x_1^0, x_2^0, \cdots x_n^0 )$이 $\mathbb{R}$ 내부에 존재할 때, linear system of ODE의 해는 다음과 같이 유일하게 존재한다.
+    \begin{equation}
+        \begin{cases}
+        x_1 = \phi_1(t) \\
+        x_2 = \phi_2(t) \\
+        \,\, \vdots \qquad \, \vdots\\
+        x_n = \phi_n(t) \\
+        \end{cases}
+        \newline
+    \end{equation}
+    \end{theorem}
+    가장 먼저 간단한 경우인 1개의 미지 함수를 다루는 경우부터 시작해서 미지 함수가 두 개인 경우, 즉 $x_1$과 $x_2$에 관한 system일 경우와 일반적인 경우에 대해 증명한다.
+    
+    \section{Single Function}
+    Single Function의 경우 주어진 ODE의 해를 Picard's iteration method를 통해 구할 수 있다.
+    \begin{remark}[Picard's Iteration Method]
+    $f$와 $\displaystyle{\frac{\partial f}{\partial y}}$ 가 $ty$-space상의 rectangle $\mathbb{R}: |t - t_0| \leq a, |y - y_0| \leq b$에서 연속일 때, $t$와 $\epsilon$에 관한 적당한 interval이 존재해 $\exists 0 < \epsilon \leq a, \ t \in [t_0 - \epsilon, t_0 + \epsilon]$ 이고, $\mathbb{R}$에서 다음과 같은 IVP는 유일한 해 $y = \phi(t)$를 가진다.
+    \begin{displaymath}
+        \frac{dy}{dt} = f(t, y(t)) \qquad y(t_0) = y_0.
+    \end{displaymath}
+    ODE의 해 $y = \phi(t)$는 다음과 같은 iteration을 통해 얻을 수 있다.
+    
+    \begin{displaymath}
+        y_{n+1}(t) = y_0 + \int_{t_0}^{t} f(\tau , y_n(\tau)) d \tau.
+    \end{displaymath}
+    \end{remark}
+    
+    \begin{proof}
+    \item
+    \paragraph{Sequence $\{y_n\}$의 존재성}
+    $f$ 와 $\displaystyle{\frac{\partial f}{\partial y}}$의 연속성에 의해 어떤 적당한 interval에서 Extreme value theorem을 적용하면
+    \begin{displaymath}
+        \exists M, N > 0 \ \text{s.t} \ |f| \leq M \ \text{and} \ \left| \frac{\partial f}{\partial y} \right| \leq N
+    \end{displaymath}
+    
+    $|f|$가 bounded라는 가정에 의해
+    \begin{displaymath}
+        \left| y_{n}(t) - y_0(t) \right| = \left| \int_{t_0}^{t} f(\tau , y_{n-1}(\tau)) d \tau \right| \leq \left| t - t_0 \right| \cdot M
+    \end{displaymath}
+    \[\therefore |t - t_0| \leq \frac{b}{M} \longrightarrow |y - y_0| < b, \ \text{i.e.} \ y \in [y_0 - b, y_0 + b], \ \exists b > 0\]
+    즉, $|t - t_0| \leq \ \text{min}\left( \frac{b}{M}, a \right)$를 만족하는 범위 내에서 함수 $y_n(t)$는 직사각형 영역 $\mathbb{R}$ 내에 존재한다.
+    \\
+    \paragraph{\bold{$\lim n \to \infty, \{y_n\}$}의 수렴성}
+    임의의 $y_n \ (n > 1)$ 에 대해서 다음과 같은 식을 생각할 수 있다.
+    \begin{displaymath}
+        y_n(t) = y_0 + \sum_{k = 0}^{n-1} \ [y_{k+1}(t) - y_k(t)]
+    \end{displaymath}
+    (1)에서
+    \begin{displaymath}
+        \left| y_{n+1}(t) - y_n(t) \right| = \left| \int_{t_0}^{t} f(\tau , y_n(\tau)) d \tau  - \int_{t_0}^{t} f(\tau , y_{n-1}(\tau)) d \tau \right| = \left| \int_{t_0}^{t} [ f(\tau , y_n(\tau) )- f(\tau , y_{n-1}(\tau)) ] d \tau \right|
+    \end{displaymath}
+    
+    다음과 같은 과정을 통해 Integration 내부의 식이 bounded above임을 보일 수 있다.
+    \begin{displaymath}
+        |f(\tau , y_n(\tau) )- f(\tau , y_{n-1}(\tau))| = \left| \frac{\partial f}{\partial y}(\tau, y^{*}(\tau)) \cdot (y_n(\tau) - y_{n-1})(\tau)\right| \leq N \cdot \ \text{max}|y_n(\tau) - y_{n-1}(\tau)|
+    \end{displaymath}
+    
+    귀납적 과정을 통해 $0 < r < 1$인 $r$에 대해 $|t - t_0| \leq \ \text{min}\left( \frac{b}{M}, a, \frac{r}{N} \right) = a^*$ 이면
+       \begin{displaymath}
+        \left| y_{n+1}(t) - y_n(t) \right| \leq \left| t - t_0 \right|N \cdot \ \text{max}\left| y_n - y_{n-1} \right| \leq r \cdot \ \text{max}_{t \in [t - a^*, t + a^*]}\left| y_n - y_{n-1} \right| \leq \cdots \leq r^n \ \text{max}\left| y_1 - y_0 \right|\\
+    \end{displaymath} 
+    
+    
+    비슷한 방법으로 $|t - t_0| \leq \ \text{min}\left( \frac{b}{m}, a, \frac{r}{N}, \frac{r}{M}\right) = \xi$인 $t$에 대해서
+    \begin{displaymath}
+        \left| y_{1}(t) - y_0(t) \right| = \left| \int_{t_0}^t f(\tau, y_0(\tau))d \tau \right| \leq |t-t_0| M \leq r
+    \end{displaymath}
+    가 성립한다.
+    \\
+    
+    
+    $\displaystyle{\forall t \in [t_0 - \xi, t_0 + \xi], \ \exists \lim_{n \to \infty} y_n}$임을 보이자.\\
+    
+    $|r| \in [0,1]$인 $r$에 대해, 공비를 $r$로 가지는 등비급수가 수렴함이 알려져 있다. 위의 결론에 의해 $\displaystyle{\forall t \in [t_0 - \xi, t_0 + \xi]}$이면 $\displaystyle{|y_n - y_{n-1}| \leq r^{n}}$이므로 \begin{displaymath}
+        \lim_{n \to \infty} \sum_{k}^{n} \left| y_k - y_{k-1} \right| \ \text{converges.}
+    \end{displaymath}
+    따라서 절대수렴정리에 의해 $\displaystyle{y_n(t) = y_0 + \sum_{k = 0}^{n-1} \ \left[y_{k+1}(t) - y_k(t)\right]}$는 수렴한다.\\
+    
+    \paragraph{$\phi$의 연속성}
+    급수가 수렴함을 보였으므로 다음과 같이 그 함수를 정의한다.
+    
+    \begin{displaymath}
+        \phi(t) = y_0 + \sum_{k = 1}^{\infty}[y_k(t) - y_{k-1}(t)]
+    \end{displaymath}
+    $\phi(t)$와 $y_n(t)$의 정의에 따라 다음의 식이 성립한다.
+    \begin{displaymath}
+        \left| \phi - y_n \right| = \sum_{k = n+1}^\infty \left| y_k - y_{k-1} \right| \leq \sum_{k = n+1}^\infty \left| r^k \right| = \frac{r^{n+1}}{1-r}
+    \end{displaymath}
+    따라서 $|\phi - y_n|$의 값이 0으로 다가간다는 것을 볼 수 있고, 보다 엄밀하게 다음을 알 수 있다.
+    \begin{equation}
+      \exists N \in \mathbb{N} \ \text{s.t.} \ \forall n > N, |\phi - y_n| = \left| \frac{r^{n+1}}{1-r} \right| < \epsilon \ \text{for any given} \ \epsilon > 0 \tag{\ast} \label{flooreq}
+    \end{equation}
+    
+    이제 앞에서 구한 $\phi(t)$가 어떤 범위 $[a, b]$에서 연속임을 보이자.\\
+    
+    임의의 $x_0 \in [a, b]$와 임의의 $\epsilon_0 > 0$에 대해
+    \begin{displaymath}
+      \left| \phi(t) - \phi(x_0) \right| \leq \left| \phi(t) - y_n(t) \right| + \left| y_n(t) - y_n(x_0) \right| + \left| y_n(x_0) - \phi(x_0) \right|
+    \end{displaymath}
+    
+    $(\ast)$에 의해 $ \left| \phi(t) - \phi(x_0) \right| \leq \epsilon_0 / 3, \ \left| y_n(x_0) - \phi(x_0) \right| \leq \epsilon_0 / 3$이고, $y_n$이 영역 $[a,b]$에서 연속이므로
+    \begin{displaymath}
+      \text{For any given}\  \epsilon > 0,\ \exists \delta > 0 \ \text{s.t.} \ 0 < |t - x_0| < \delta \longrightarrow |y_n(t) - y_n(x_0)| < \epsilon 
+    \end{displaymath}
+    
+    위의 식이 $\epsilon = \epsilon_0 / 3$에 대해 성립하므로
+    \begin{displaymath}
+      \left| \phi(t) - \phi(x_0) \right| \leq \left| \phi(t) - y_n(t) \right| + \left| y_n(t) - y_n(x_0) \right| + \left| y_n(x_0) - \phi(x_0) \right| < \frac{\epsilon_0}{3} + \frac{\epsilon_0}{3} + \frac{\epsilon_0}{3} = \epsilon_0
+    \end{displaymath}
+    따라서 $\phi$는 적당한 범위에서 연속이고, Fundamental Theorem of Calculus에 의해 
+    \begin{displaymath}
+      \phi(t) = y_0 + \int_{t_0}^{t}f(\tau, \phi(\tau)) d \tau
+    \end{displaymath}
+    
+    \paragraph{$\phi$의 유일성}
+    Initial value problem
+    \begin{displaymath}
+        \frac{dy}{dt} = f(t, y(t)) \qquad y(t_0) = y_0
+    \end{displaymath}
+    를 만족하는 서로 다른 해 $y = \phi(t)$와 $y = \psi(t)$가 존재한다고 가정한다. 이 때 %\begin{displaymath}
+    %    |\phi(t) - \psi(t)| = \int_{t_0}^{t} [ f(\tau, \phi(\tau)) - f(\tau, \psi(\tau))] d \tau \leq |t - t_0| \cdot N \ \text{max}_{\tau \in [t_0 - h, t_0 + h]} |\phi(\tau) - \psi(\tau)|
+    %\end{displaymath}
+    
+    \begin{displaymath}
+        |\phi(t) - \psi(t)| = \int_{t_0}^{t} [ f(\tau, \phi(\tau)) - f(\tau, \psi(\tau))] d \tau \leq N \cdot \int_{t_0}^{t}|\phi(\tau) - \psi(\tau)| d\tau
+    \end{displaymath}
+    $\displaystyle{U(x) = \int_{t_0}^{t}|\phi(\tau) - \psi(\tau)| d\tau}$라고 하면 $U(x) \geq 0, \ x > x_0$이다.
+    위의 식은
+    \begin{displaymath}
+        U^{\prime}(x) - N\cdot U(x) \leq 0 \iff \frac{d}{dx} \left[ U(x) e^{-N(x-x_0)}\right] \leq 0 \longrightarrow \int_{x_0}^{x} \frac{d}{d \tau} \left[ U(\tau) e^{-N(\tau-\tau_0)}\right] d \tau \leq 0
+        \therefore U(x) \leq 0 \ \text{for} \ x > x_0
+    \end{displaymath}
+     
+    \begin{displaymath}
+        U(x) \geq 0, \ U(x) \leq 0 \iff U(x) = \int_{t_0}^{t}|\phi(\tau) - \psi(\tau)| d\tau = 0
+    \end{displaymath}
+    \begin{displaymath}
+        \therefore
+        \phi(\tau) = \psi(\tau) \ \text{for all} \ x \in [x_0, x_0 + h]
+    \end{displaymath}
+    \end{proof}
+    
+    \section{else}
+    어떤 column matrix $X$와 a에 대해 
+    \begin{displaymath}
+        X^{\prime}(t) = \mathbf{A}(t)X + B(t), \text{\qaud} X(\tau) = \xi, t \in I
+    \end{displaymath}
+    
+    \begin{displaymath}
+        X(t) = \xi + \int_{\tau}^{t}[\mathbf{A}(s)X(s) + B(s)] ds, t \in I
+    \end{displaymath} 
+    
+    \[
+    \begin{bmatrix}
+        x_{11}       & x_{12} & x_{13} & \dots & x_{1n} \\
+        x_{21}       & x_{22} & x_{23} & \dots & x_{2n} \\
+        \hdotsfor{5} \\
+        x_{d1}       & x_{d2} & x_{d3} & \dots & x_{dn}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        x_{11} & x_{12} & x_{13} & \dots  & x_{1n} \\
+        x_{21} & x_{22} & x_{23} & \dots  & x_{2n} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        x_{d1} & x_{d2} & x_{d3} & \dots  & x_{dn}
+    \end{bmatrix}
+    \]
+    
+    \end{document}
+    
