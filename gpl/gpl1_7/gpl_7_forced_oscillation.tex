@@ -1,0 +1,83 @@
+\documentclass[a4paper]{article}
+\usepackage{array, xcolor, lipsum, bibentry,fancyhdr}
+\usepackage[scale=0.75,twoside,bindingoffset=5mm]{geometry}
+\usepackage[onehalfspacing]{setspace}
+\usepackage{amsmath, kotex, graphicx, amsthm}
+\usepackage{multirow}
+
+\newtheorem{theorem}{Theorem}%[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}{Remark}
+
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+%\renewcommand{\footrulewidth}{0.4pt}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage[utf8]{inputenc}
+
+\author{16-046 백승재, 16-087 이현동}
+
+\title{Lab 07. Forced Oscillation}
+\begin{document}
+\maketitle
+%\tableofcontents
+
+\begin{abstract}
+Hello, world!
+\end{abstract}
+
+\section{Introduction}
+This experiment is about simple, damped, and forced harmonic motion. In the spring-mass system, we can find out the change of velocity and analyze the motion of the mass.
+\section{Theory}
+% ###################################################
+\subsection{Simple Harmonic Motion}
+Simple Harmonic Motion (SHM) is given by
+\begin{equation*}
+    \frac{d^2x}{dt^2} + \frac{k}{m}x = 0
+\end{equation*}
+Solving this equation about $x$, we can get the solution $x(t)$:
+\begin{equation*}
+    x(t) = A \sin (\omega_0t + \theta_0) \qquad
+    \omega_0 = \sqrt{\frac{k}{m}}
+\end{equation*}
+% ############################################################
+\subsection{Damped Harmonic Motion}
+Damped harmonic motion is different from the equation of SHM since it includes another term,
+\begin{equation*}
+    \frac{d^2x}{dt^2} + \frac{b}{m}\frac{dx}{dt} +\frac{k}{m}x = 0
+\end{equation*}
+which leads to the other solution of $x$:
+\begin{equation*}
+    x(t) = x_0e^{-\omega_{\gamma}t}\sin(\omega^\prime t)
+\end{equation*}
+where
+\begin{equation*}
+    \omega_\gamma = \frac{b}{2m} \qquad \omega^{\prime 2} = \omega_0^2 - \omega_\gamma^2
+\end{equation*}
+% ######################################################## 
+\subsection{Damped Harmonic Motion}
+Forced harmonic motion with driving force $F_d$ is expressed by the following equation.
+\begin{equation*}
+    m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_d(t)
+\end{equation*}
+By using the fact that $F_d(t) = F_d\cos(\omega_dt)$, this leads to the following equation.
+\begin{equation*}
+    \frac{d^2x}{dt^2} + \frac{b}{m}\frac{dx}{dt} + \frac{k}{m}x - \frac{F_d}{m}\cos(\omega_dt) = 0
+\end{equation*}
+
+% ################################################## 
+\section{Procedure}
+
+\section{Results and Analysis}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+\end{document}
